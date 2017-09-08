@@ -1,1 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Table</title>
+    <style type="text/css">
+      .mag_wrap{position:relative}
+      .src_box{background:#eee;overflow:hidden}
+      .small_img{width:100%;height:100%;display:none}
+      .small_img.active{display:block}
+      .magnifier{position:absolute;display:none;border:1px solid #eee;}
+      .view{position:absolute;top:0;display:none;border:1px solid #333;overflow:hidden;z-index:2}
+      .big_img{position:absolute;left:0;top:0}
+      .mag_btn>span{display:inline-block;padding:5px 10px;magrin:0 5px;background:#ddd;cursor:pointer}
+      .mag_btn>span:hover,
+      .mag_btn>span.active{background:red;color:#fff}
+    </style>
+</head>
+<body >
+  <div class="wag_wrap">
+    <div class="src_box">
+      <img src="./images/001.png" alt="图片" class="small_img active" />  
+      <img src="./images/002.png" alt="图片" class="small_img" />  
+      <img src="./images/003.png" alt="图片" class="small_img" />  
+      <div class="magnifier"></div>
+    </div>
+    <div class="view">
+       <img src="" alt="大图片" class="big_img" />  
+    </div>
+    <div class="mag_btn">
+      <span class="active">1</span>
+      <span class="">2</span>
+      <span class="">3</span>
+    </div
+  </div>
+  <script type="text/javascript" src="./libs/jquery.min.js"></script>
+  <script type="text/javascript" src="./magnifier.js"></script>
+  <script type="text/javascript" >
+      $(function(){
+        // 初始化组件  
+        $(".small_img.active").magnifier();
+        
+        $(".mag_btn").on("click","span",function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            var index = $(this).index();
+            var imgs = $(".small_img");
+            imgs.each(function(i,n){
+              imgs[i].className = "small_img";
+              imgs[index].classList.add("active");
+            });
+            
+            // 再次  
+            $(".small_img.active").magnifier();
+        })
+        
+      });
+  </script>
+</body>
+</html>
